@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #--*--coding:UTF-8 --*--
-#DXVA HRA WTF!!!
+#TODO DXVA,create warez object from xml
+# HRA WTF!!!
 
 import sys
 import os
