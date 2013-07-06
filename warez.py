@@ -16,7 +16,7 @@ from xml.dom import minidom
 
 sources_rip=['BluRay','HDRiP','DVDRiP','AHDTV','SDTV','PDTV','DVB','HDTV','.LD.','WEBRiP','.CAM.','DVDSCR','DTheater','BD5','BD9','R5','SATRiP','WEB.DL','DVD5']
 l_quality=['1080p','1080i','720p','576p','576i','480p','480i','TrueHD']
-flux=['AVC','x264','h264','MPEG2','XviD','MPEG4']
+flux=['AVC','x264','h264','MPEG2','XviD','MPEG4','DVXA']
 languages=['MULTi','TRUEFRENCH','FRENCH','USA','VOSTFR']
 audios=['AAC20','DTS.HDMA','DTS','HRA','DD5.1','AC3','5.1']
 versions=['LiMiTED','FESTiVAL','STV','UNCUT','UNRATED','RATED','BONUS','SUBFORCED','PROPER','FASTSUB','SUNSHINE.EDITION','REVISITED.FiNAL.CUT','DIRECTOR.CUT','THEATRICAL.CUT','REAL','EXTENDED','REMASTERED','REPACK','REMUX','CUSTOM','COMPLETE','FiNAL','PREAiR','RERIP','RETAIL','DOC']
@@ -197,7 +197,7 @@ class wrez:
 		new_name = string.replace(name,' ', '.')
 		new_name = self.remove_uploader(new_name)
 		new_name = string.replace(new_name,'..', '.')
-		#new_name = string.replace(new_name,'JKF.3D', 'JFK3D')
+		
 		#new_name = string.replace(name,'&.', '.') BUG
 		
 		new_name = string.replace(new_name,'-', '.')
@@ -242,7 +242,7 @@ class wrez:
 		new_name = string.replace(new_name,'DVDrip','DVDRiP')
 		new_name = string.replace(new_name,'DVDriP','DVDRiP')
 		new_name = string.replace(new_name,'dvdrip','DVDRiP')
-		#new_name = string.replace(new_name,'DVD5','DVDRiP')
+		new_name = string.replace(new_name,'DVD5','DVDRiP')
 		new_name = string.replace(new_name,'.DVD.','DVDRiP')
 		
 		
@@ -299,13 +299,14 @@ class wrez:
 		new_name = string.replace(new_name,'LIMITED','LiMiTED')
 		
 		new_name = string.replace(new_name,'iNT','iNTERNAL')
+		new_name = string.replace(new_name,'JKF.3D', 'JFK3D')
 		new_name = string.replace(new_name,'GAIA', 'GAÏA')
 		new_name = string.replace(new_name,'Gaïa', 'GAÏA')
 		new_name = string.replace(new_name,'GAÃA', 'GAÏA')
 		new_name = string.replace(new_name,'GAÏA', 'GAÏA')
 		new_name = string.replace(new_name,'GAiA', 'GAÏA')
 		
-		new_name = string.replace(new_name,'dxva', 'MULTi') #<--- WTF
+		new_name = string.replace(new_name,'dxva', 'DXVA') #<--- WTF
 		new_name = string.replace(new_name,'rip','')
 		new_name = string.replace(new_name,'Rip','')
 		new_name = string.replace(new_name,'Ripp','')
