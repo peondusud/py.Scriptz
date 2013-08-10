@@ -192,6 +192,27 @@ class wrez:
 		new_name = string.replace(strz,'..', '.')
 		return new_name
 		
+	def warez2dic():
+		warez = {"path" : self.path,
+		"init_str" : self.init_str,
+		"hash_sha512" : self.hash_sha512,
+		"src_rip" : self.src_rip,
+		"quality" : self.quality,
+		"codec" : self.codec,
+		"lang" : self.language,
+		"l_audio" : self.l_audio,
+		"audio" : self.audio,
+		"encoder" : self.encoder,
+		"l_version" : self.l_version,
+		"version" : self.version,
+		"extension" : self.extension,
+		"release_year" : self.release_year,
+		"title" : self.title,
+		"size" : self.size,
+		"hasChanged" : self.hasChanged}
+		return warez
+		
+		
 		
 	def removez_all(self,name):
 		new_name = string.replace(name,' ', '.')
