@@ -1,4 +1,5 @@
 import tmdb
+api_key="838c66a69f92542c658a03da687b8b99"
 tmdb.configure(api_key)
 # Search for movie titles containing "Alien"
 movies = tmdb.Movies("Alien")
