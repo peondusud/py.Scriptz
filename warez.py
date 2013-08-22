@@ -28,36 +28,56 @@ listz_uploader = ['UpByArG','kn0ppixs','wWw.Mega.Exclue.Com','Extreme.Down.Com']
 
 class wrez:
 
-  def __init__(self,pathz,name):
-		self.path=pathz
-		self.init_str=name
-		self.hash_sha512=""
-		self.src_rip=""
-		self.quality=""
-		self.codec=""
-		self.language=""
-		self.l_audio=[]
-		self.audio=""
-		self.encoder=""
-		self.l_version=[]
-		self.version=""
-		self.extension=""
-		self.release_year=""
-		self.title=""
-		self.size=int(0)
-		self.hasChanged=False
-		
-		
-		
-		self.sha512()
-		#tmp = Thread(None, sha512(), None, (), {})
-		#tmp.daemon=True
-		#tmp.start()
-		
-		
-		self.get_size()
-		self.search_title()
-		self.printz()
+	def __init__(self,pathz,name , dic=None):
+		if dic is None:
+			self.path=pathz
+			self.init_str=name
+			self.hash_sha512=""
+			self.src_rip=""
+			self.quality=""
+			self.codec=""
+			self.language=""
+			self.l_audio=[]
+			self.audio=""
+			self.encoder=""
+			self.l_version=[]
+			self.version=""
+			self.extension=""
+			self.release_year=""
+			self.title=""
+			self.size=int(0)
+			self.hasChanged=False
+						
+			self.sha512()		
+			self.get_size()
+			self.search_title()
+			self.printz()
+		else:
+			try:
+				self.path = dic["path"]
+				self.init_str = dic["init_str"]
+				self.hash_sha512 = dic["hash"]
+				self.src_rip = dic["src_rip"]
+				self.quality = dic["quality"]
+				self.codec = dic["codec"]
+				self.language = dic["language"]
+				self.l_audio = dic["l_audio"]
+				self.audio = dic["audio"]
+				self.encoder = dic["encoder"]
+				self.l_version = dic["l_version"]
+				self.version = dic["version"]
+				self.extension = dic["extension"]
+				self.release_year = dic["release_year"]
+				self.title = dic["title"]
+				self.size = dic["size"]
+				self.hasChanged= dic["hasChanged"]
+				self.printz()
+			except Exception as e:
+				print e
+				
+				
+				
+
 		
 		
 	def search_ext(self,strz):
@@ -192,23 +212,23 @@ class wrez:
 		new_name = string.replace(strz,'..', '.')
 		return new_name
 		
-	def warez2dic():
-		warez = {"path" : self.path,
-		"init_str" : self.init_str,
-		"hash_sha512" : self.hash_sha512,
-		"src_rip" : self.src_rip,
-		"quality" : self.quality,
-		"codec" : self.codec,
-		"lang" : self.language,
-		"l_audio" : self.l_audio,
-		"audio" : self.audio,
-		"encoder" : self.encoder,
-		"l_version" : self.l_version,
-		"version" : self.version,
-		"extension" : self.extension,
-		"release_year" : self.release_year,
-		"title" : self.title,
-		"size" : self.size,
+	def warez2dic(self):
+		warez = {"path" : self.path,\
+		"init_str" : self.init_str,\
+		"hash_sha512" : self.hash_sha512,\
+		"src_rip" : self.src_rip,\
+		"quality" : self.quality,\
+		"codec" : self.codec,\
+		"lang" : self.language,\
+		"l_audio" : self.l_audio,\
+		"audio" : self.audio,\
+		"encoder" : self.encoder,\
+		"l_version" : self.l_version,\
+		"version" : self.version,\
+		"extension" : self.extension,\
+		"release_year" : self.release_year,\
+		"title" : self.title,\
+		"size" : self.size,\
 		"hasChanged" : self.hasChanged}
 		return warez
 		
@@ -520,7 +540,7 @@ def recover_old_filename(listz):
 			os.rename(old_path,new_path)
 
 def extract_list_from_xml(path):
-	
+	listz=[]
 	doc = minidom.parse(path)
 	root = doc.documentElement
 	current = root.firstChild
@@ -531,68 +551,96 @@ def extract_list_from_xml(path):
 			
 				attrs = current.attributes
 				
-				print attrs.items()[0]
-				hasChanged=attrs.items()[0][1]	
+				#print attrs.items()[0]
+				hasChanged=attrs.items()[0][1]
+				
 				for elem in current.getElementsByTagName('path'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					path=elem.attributes.items()[0][1]
 				
 				for elem in current.getElementsByTagName('init_str'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					init_str=elem.attributes.items()[0][1]
 
 				for elem in current.getElementsByTagName('hash_sha512'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					hash_sha512=elem.attributes.items()[0][1]
 	
 				for elem in current.getElementsByTagName('src_rip'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					src_rip=elem.attributes.items()[0][1]
 
 				for elem in current.getElementsByTagName('quality'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					quality=elem.attributes.items()[0][1]
 					
 				for elem in current.getElementsByTagName('codec'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					codec=elem.attributes.items()[0][1]
 	
 				for elem in current.getElementsByTagName('language'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					language=elem.attributes.items()[0][1]
 	
 				for elem in current.getElementsByTagName('audio'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					audio=elem.attributes.items()[0][1]
 
 				for elem in current.getElementsByTagName('encoder'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					encoder=elem.attributes.items()[0][1]
 
 				for elem in current.getElementsByTagName('version'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					version=elem.attributes.items()[0][1]
 			
 				for elem in current.getElementsByTagName('extension'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					extension=elem.attributes.items()[0][1]
 
 				for elem in current.getElementsByTagName('release_year'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					release_year=elem.attributes.items()[0][1]
 			
 				for elem in current.getElementsByTagName('title'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					title=elem.attributes.items()[0][1]
 
 				for elem in current.getElementsByTagName('size'):
-					print elem.attributes.items()[0][1]
+					#print elem.attributes.items()[0][1]
 					size=elem.attributes.items()[0][1]
-				
-			
+
+
+				dic["path"] = path 
+				dic["init_str"] = init_str
+				dic["hash"] = hash_sha512
+				dic["src_rip"] = src_rip
+				dic["quality"] = quality
+				dic["codec"] = codec
+				dic["language"] = language
+				dic["l_audio"] = l_audio
+				dic["audio"] = audio
+				dic["encoder"] = encoder
+				dic["l_version"] = l_version
+				dic["version"] = version
+				dic["extension"] = extension
+				dic["release_year"] = release_year
+				dic["title"] = title
+				dic["size"] = size
+				dic["hasChanged"] = shasChanged
+				warz = warez("","",dic)
+				listz.append(warz)			
 			
 			#print current.firstChild #same
 			current = current.nextSibling
+
+	return listz
+			
+def save_list_mongo(listz):
+		
+	connection = pymongo.Connection('localhost', 27017)
+	db = connection.database
+	collection = db.warez_collection
 	
 
 
