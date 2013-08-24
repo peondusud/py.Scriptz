@@ -8,9 +8,10 @@ noTix_flag=0
 try:
 	import Tix
 	root = Tix.Tcl()
-	root.tk.eval('package require Tix')
+	del(root)
 	
 except Exception as e:
+	print e
 	import Tkinter as Tix
 	noTix_flag=1
 	print "Warning : Next time install \"tix\" package"
