@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 #--*--coding:UTF-8 --*--
-#TODO DXVA,create warez object from xml
-# HRA WTF!!!
 
 import sys
 import os
@@ -15,20 +13,29 @@ from xml.dom import minidom
 
 
 sources_rip=['BluRay','HDRiP','DVDRiP','AHDTV','SDTV','PDTV','DVB','HDTV','.LD.','WEBRiP','.CAM.','DVDSCR','DTheater','BD5','BD9','R5','SATRiP','WEB.DL','DVD5']
-l_quality=['1080p','1080i','720p','576p','576i','480p','480i','TrueHD']
+l_quality=['4K.','1080p','1080i','720p','576p','576i','480p','480i','TrueHD']
 flux=['AVC','x264','h264','MPEG2','XviD','MPEG4','DVXA']
-languages=['MULTi','TRUEFRENCH','FRENCH','USA','VOSTFR','.VO.]
+languages=['MULTi','TRUEFRENCH','FRENCH','USA','VOSTFR','.VO.']
 audios=['AAC20','DTS.HDMA','DTS','HRA','DD5.1','AC3','5.1']
 versions=['LiMiTED','FESTiVAL','STV','UNCUT','UNRATED','RATED','BONUS','SUBFORCED','PROPER','FASTSUB','SUNSHINE.EDITION','REVISITED.FiNAL.CUT','DIRECTOR.CUT','THEATRICAL.CUT','REAL','EXTENDED','REMASTERED','REPACK','REMUX','CUSTOM','COMPLETE','FiNAL','PREAiR','RERIP','RETAIL','DOC']
 file_type=['mp4','mkv','m2t','m2ts','ts']
-teamz=['iND','iNT','iNTERNAL','ForceBleue','NOWiNHD','FrIeNdS','GAÏA','FHD','RLD','WiKi','.SS.','EbP','HidT','RuDe','HDxT','HDBRiSe','AMIABLE','DREAM','THENiGHTMAREiNHD','FYR','Slug','Ratat','HDZ','BiT','CiNEFOX','DiGiTAL','SoSo','ULSHDULSHD','HDFRENCH','PtS','Sunspot','HDS','ESiR','TAMEREENHD','MouL1','H2.','BigF','DON.','LOST','UNiK','FMS','BestHD','CryHD','wazatt','STI.','PURE','HDicTs','iDHD','KLine','HiDeF','CtrlHD','RedLeadR','MULTiGRPS','NERDHD','Okipic','CHD','GKS','T3k','Flx','LiberTeam','FLAWL3SS','TMB','V.Eyes','TLEMA','SS','KASH','THUGLiNE','MACHD','SSL','4kHD','HayesCarter','HDMaNiAcS','Osmos','STEAL','ROUGH','HDX','HDD','FwD','Rhéia','SANSDouTE','MOMENTUM','SHORTBREHD','CTU','FAUD','Ganesh','LaGoA','HDTFTD','FREHD','Heman','MAGiCAL','ENjOi','iNFAMOUS','HOLiDAYS','GALAC','EliteT','ULSHD','MANGACiTY','EXTREME','ZEST','SLiMHD','JMT','EPZ','BAWLS','FQM','AFG','SiNX','TERRA','NANO','TASTETV','LOGIES','PIX','mSD','tNe','AiRLiNE','RELOADED','Sookie','PROTEiGON','KULTURA','TiMiDe','STuFF','Tekmatek','JRabbit','St4f','ARTEFAC','DUFF','F4ST','ABiTBOL','ATeR','MUxHD','FJF','CARPEDIEM','MiKKELSEN','JASS','RiV3R','FiDELiO','LNA3D,','DIMENSION','NeMo','SEiGHT','KAMUi','KINeMA','CHDBits','FFG','HDILLUZION','HDEAL','CMBHD','HyDe','HDaY','SBSLNA3D','HDCLUB','KievUa','PublicHD','HDWinG','HDChina','LNA3D','JKF3D','BLUEBIRD','TYMOXA','SirYo','FQT','SYNERGY','CiNEFiLE']
+teamz=['iND','iNT','iNTERNAL','ForceBleue','NOWiNHD','FrIeNdS','GAÏA','FHD','RLD','WiKi','.SS.','EbP','HidT','RuDe','HDxT','HDBRiSe','AMIABLE','DREAM','THENiGHTMAREiNHD','FYR','Slug','Ratat','HDZ','BiT','CiNEFOX','DiGiTAL','SoSo','ULSHDULSHD','HDFRENCH','PtS','Sunspot','HDS','ESiR','TAMEREENHD','MouL1','H2.','BigF','DON.','LOST','UNiK','FMS','BestHD','CryHD','wazatt','STI.','PURE','HDicTs','iDHD','KLine','HiDeF','CtrlHD','RedLeadR','MULTiGRPS','NERDHD','Okipic','CHD','GKS','T3k','Flx','LiberTeam','FLAWL3SS','TMB','V.Eyes','TLEMA','SS','KASH','THUGLiNE','MACHD','SSL','4kHD','HayesCarter','HDMaNiAcS','Osmos','STEAL','ROUGH','HDX','HDD','FwD','Rhéia','SANSDouTE','MOMENTUM','SHORTBREHD','CTU','FAUD','Ganesh','LaGoA','HDTFTD','FREHD','Heman','MAGiCAL','ENjOi','iNFAMOUS','HOLiDAYS','GALAC','EliteT','ULSHD','MANGACiTY','EXTREME','ZEST','SLiMHD','JMT','EPZ','BAWLS','FQM','AFG','SiNX','TERRA','NANO','TASTETV','LOGIES','PIX','mSD','tNe','AiRLiNE','RELOADED','Sookie','PROTEiGON','KULTURA','TiMiDe','STuFF','Tekmatek','JRabbit','St4f','ARTEFAC','DUFF','F4ST','ABiTBOL','ATeR','MUxHD','FJF','CARPEDIEM','MiKKELSEN','JASS','RiV3R','FiDELiO','LNA3D,','DIMENSION','NeMo','SEiGHT','KAMUi','KINeMA','CHDBits','FFG','HDILLUZION','HDEAL','CMBHD','HyDe','HDaY','SBSLNA3D','HDCLUB','KievUa','PublicHD','HDWinG','HDChina','LNA3D','JKF3D','BLUEBIRD','TYMOXA','SirYo','FQT','SYNERGY','CiNEFiLE','SALEM']
 no_upper=['mkv','x264','h264','m2t','ts','iND','wazatt','xXx']
 listz_uploader = ['UpByArG','kn0ppixs','wWw.Mega.Exclue.Com','Extreme.Down.Com']
+
+CSI = "\033["
+color_list =("black","red","green","yellow","blue","magenta","cyan","white","","standard")
+fgcode = CSI+ "3%dm"
+
+
 
 
 class wrez:
 
 	def __init__(self,pathz,name , dic=None):
+		"""
+			wrez constructor
+		"""
 		if dic is None:
 			self.path=pathz
 			self.init_str=name
@@ -47,7 +54,8 @@ class wrez:
 			self.title=""
 			self.size=int(0)
 			self.hasChanged=False
-						
+
+				
 			self.sha512()		
 			self.get_size()
 			self.search_title()
@@ -74,71 +82,133 @@ class wrez:
 				self.printz()
 			except Exception as e:
 				print e
-				
-				
-				
-
+	
 		
 		
 	def search_ext(self,strz):
-		for ext in file_type:
+		"""
+			search the extension of a filename string
+		"""
+		for ext in file_type:	#file_type = list of allow extension words
 			if strz.endswith(ext):
 				self.extension=ext
 				return strz.replace(ext,"")
 		return strz
+
 	
 	def search_encoder(self,strz):
-		for team in teamz:
+		"""
+			search the encoder's team in the string
+		"""
+		for team in teamz:	#teamz = list of allow teamz words
 			if team in strz:
-				self.encoder=team
+				self.encoder=team.replace(".","")
 				return strz.replace(team,"")
 		return strz
+
 	
 	def search_quality(self,strz):
-		for q in l_quality:
+		"""
+			search the quality in the string
+		"""
+		for q in l_quality: #l_quality = list of allow quality words
 			if q in strz:
-				self.quality=q
+				self.quality=q.replace(".","")
 				return strz.replace(q,"")
 		return strz
+
 		
 	def search_codec(self,strz):
-		for cod in flux:
+		"""
+			search the codec in the string
+		"""
+		for cod in flux: #flux = list of allow codec words
 			if cod in strz:
-				self.codec=cod
+				self.codec=cod.replace(".","")
 				return strz.replace(cod,"")
 		return strz
 		
+		
 	def search_lang(self,strz):
-		for lang in languages:
+		"""
+			search the language of a movie in the string
+		"""
+		for lang in languages: #languages = list of allow lang words
 			if lang in strz:
-				self.language+='.'+lang
+				if len(self.language)>0:
+					self.language+='.'+lang.replace(".","")
+				else:
+					self.language+=lang.replace(".","")
 				strz =strz.replace(lang,"")
 		return strz
+
 		
 	def search_version(self,strz):
-		for ver in versions:
+		"""
+			search the version of a movie in a string
+			example: directory's cut,...
+		"""
+		for ver in versions: #version= list of allow version words
 			if ver in strz:
-				self.l_version.append(ver)
+				self.l_version.append( ver.replace(".","") )
 				strz = strz.replace(ver,"")
 				
 		return strz
+
 		
 	def search_source(self,strz):
-		for src in sources_rip:
+		"""
+			search source ri in the string
+		"""
+		for src in sources_rip: #sources_rip = list of allow source words
 			if src in strz:
-				self.src_rip=src
+				self.src_rip=src.replace(".","")
 				return strz.replace(src,"")
 		return strz
+
 		
 	def search_audio(self,strz):
-		for aud in audios:
+		"""
+			collect all information about audio in a string
+		"""
+		for aud in audios: #audios = list of allow audio words
 			if aud in strz:
 				self.l_audio.append(aud)
 				strz= strz.replace(aud,"")
 		return strz
+
+
+	def search_season_episode(self,strz):
+		"""
+			find the season and episode number on the string
+		"""	
+		pattern = compile("(S(\d\d)E(\d\d))") #S01E03
+		sep = pattern.search(strz)		
+		if sep is not None:
+			se= sep.group(1)
+			season = sep.group(2)
+			episode = sep.group(3)
+			return strz.replace(se,"")
+			
+		pattern = compile("((\d\d)x(\d\d))") #01x03
+		sep = pattern.search(strz)		
+		if sep is not None:
+			se= sep.group(1)
+			season = sep.group(2)
+			episode = sep.group(3)
+			return strz.replace(se,"")
+			
+		pattern = compile("(Ep(\d\d))") #Ep03
+		sep = pattern.search(strz)		
+		if sep is not None:
+			se= sep.group(1)
+			episode = sep.group(2)
+			return strz.replace(se,"")
 		
 	def search_year(self,strz):
-		
+		"""
+			find the year on the string from 1950 to 2019
+		"""	
 		yr_pattern = compile("(19[56789]\d|20[01]\d)")
 		yr = yr_pattern.search(strz)		
 		if yr is None:
@@ -150,13 +220,20 @@ class wrez:
 	
 	
 	def reorder(self):
-		self.version = ".".join(tuple(self.l_version))
+		"""
+			reorder filename from all informations collected
+		"""
+		self.version = ".".join(tuple(self.l_version))		
 		self.audio = ".".join(tuple(self.l_audio))
-		str=".".join((self.title+self.release_year , self.version , self.language, self.quality , self.src_rip ,self.audio , self.codec, self.encoder, self.extension))
+				
+		strz=".".join((self.title ,self.release_year , self.version , self.language, self.quality , self.src_rip ,self.audio , self.codec + '-' + self.encoder, self.extension))
 		
-		return str.replace('..','.')
+		return strz.replace('..','.') # remove double dot (reason: join dot between 2 empty element)
 			
 	def printz(self):
+		"""
+			print variables function
+		"""
 		self.version = ".".join(tuple(self.l_version))
 		self.audio = ".".join(tuple(self.l_audio))
 		print "Path =",self.path
@@ -172,11 +249,21 @@ class wrez:
 		print "Encoder TEAM =",self.encoder		
 		print "Extension file=",self.extension
 		print "Hash sha512 =",str(self.hash_sha512)
-		print "Size =", self.size/float(2**20) ,"in MiB" 
-		print "Re-ordered Name =",self.reorder()
-			
+		print "Size =", self.size/float(2**20) ,"in MiB"
+		strz = self.reorder()
+		print "Re-ordered Name =", strz
+
+
+	def remove_lasts_dots(self, strz):
+		while strz[-1]	== '.':
+			strz=strz[:-1]
+		return strz
+		
 			
 	def search_title(self):
+		"""
+			remove all parts of a string to find the lat part (the title)
+		"""
 		new_name = self.removez_all(self.init_str)
 		result = self.search_ext(new_name)
 		result =  self.search_encoder(result)
@@ -187,25 +274,36 @@ class wrez:
 		result =  self.search_source(result)
 		result =  self.search_audio(result)
 		result =  self.search_year(result)
-		result = string.replace(result,'..', '.')
-		self.title = string.replace(result,'..', '.')
+		result = result.replace('...', '.')
+		result = result.replace('..', '.')
+		self.title = self.remove_lasts_dots(result)
 		
 	
 	def upper_first_char(self,strz):
-		if (len(strz) < 2) or no_upper:
+		"""
+			Upper case the first char of a word longer than 2
+		"""
+		if (len(strz) < 2) or no_upper: #no_upper list of element to no upper 
 			return strz
 		else:
 			return strz[0].upper()+strz[1:]
 
+
 	def refactor_line(self,strz):
+		"""
+			Upper case the first character if of each word in the string
+		"""
 		listz=strz.split(".")
 		tmp=[]
 		for element in listz:
 			tmp.append(self.upper_first_char(element))
 		return ".".join( tmp)
+
 		
-	def remove_uploader(self,strz):	
-		
+	def remove_uploader(self,strz):
+		"""
+			remove uploader or website tags in the filename
+		"""
 		for elem in listz_uploader:
 			if elem in strz:
 				strz = strz.replace(elem,'')
@@ -213,6 +311,9 @@ class wrez:
 		return new_name
 		
 	def warez2dic(self):
+		"""
+			save the warez as a dictionnary representation (usefull for mongo)
+		"""
 		warez = {"path" : self.path,\
 		"init_str" : self.init_str,\
 		"hash_sha512" : self.hash_sha512,\
@@ -235,11 +336,14 @@ class wrez:
 		
 		
 	def removez_all(self,name):
+		"""
+			remove and reformat filename to warez rules
+		"""
 		new_name = string.replace(name,' ', '.')
 		new_name = self.remove_uploader(new_name)
 		new_name = string.replace(new_name,'..', '.')
 		
-		#new_name = string.replace(name,'&.', '.') BUG
+		#new_name = string.replace(name,'\&.', '.') BUG
 		
 		new_name = string.replace(new_name,'-', '.')
 		new_name = string.replace(new_name,'_', '.')		
@@ -275,6 +379,7 @@ class wrez:
 		new_name = string.replace(new_name,'BDRiP', 'BluRay')
 		new_name = string.replace(new_name,'BRDRiP', 'BluRay')
 		new_name = string.replace(new_name,'BRDRip', 'BluRay')
+		new_name = string.replace(new_name,'BRRip', 'BluRay')
 		new_name = string.replace(new_name,'BD', 'BluRay')
 		new_name = string.replace(new_name,'HD-DVDRiP', 'HDRiP')
 		new_name = string.replace(new_name,'HD.DVDRiP', 'HDRiP')
@@ -303,9 +408,10 @@ class wrez:
 		new_name = string.replace(new_name,'ac3','AC3')
 		new_name = string.replace(new_name,'Ac3','AC3')
 		new_name = string.replace(new_name,'AC.3.','AC3.')
-		new_name = string.replace(new_name,'HD.HRA','')
-			
-		#new_name = string.replace(new_name,'.HRA.', '.') #wtf
+		
+		new_name = string.replace(new_name,'HD.HRA','HRA') #High resolution audio
+		#new_name = string.replace(new_name,'.HRA.', '.')
+		
 		new_name = string.replace(new_name,'.fr.', '.FRENCH.')
 		new_name = string.replace(new_name,'.Fr.', '.FRENCH.')
 		new_name = string.replace(new_name,'.FR.', '.FRENCH.')
@@ -347,7 +453,7 @@ class wrez:
 		new_name = string.replace(new_name,'GAÏA', 'GAÏA')
 		new_name = string.replace(new_name,'GAiA', 'GAÏA')
 		
-		new_name = string.replace(new_name,'dxva', 'DXVA') #<--- WTF
+		new_name = string.replace(new_name,'dxva', 'DXVA') #<harwdare decode
 		new_name = string.replace(new_name,'rip','')
 		new_name = string.replace(new_name,'Rip','')
 		new_name = string.replace(new_name,'Ripp','')
@@ -356,21 +462,29 @@ class wrez:
 		return self.refactor_line(new_name)
 		
 	def reformat(self):
-		old_path =os.path.join(self.path, self.init_str)
-		new_path=os.path.join(self.path, self.reorder())
+		"""
+			rename the filename with the reorder function
+		"""
+		old_path = os.path.join( self.path, self.init_str )
+		new_path = os.path.join( self.path, self.reorder() )
 		os.rename(old_path,new_path)
 
 	def get_size(self):
+		"""
+			obtain the size of the file
+		"""
 		path =os.path.join(self.path, self.init_str)
 		try:
 			self.size = os.path.getsize(path)
 		except :
-			pass
-			self.size =0
+			self.size = 0
 
 			
 	def sha512(self):
-		path =os.path.join(self.path, self.init_str)
+		"""
+			compute sha-512 hash 
+		"""
+		path = os.path.join(self.path, self.init_str)
 		try:
 			h = sha512()
 			fd = open(path,'rb')
@@ -379,7 +493,8 @@ class wrez:
 			fd.close()
 			self.hash_sha512 = str(h.hexdigest())
 		except IOError as e:
-			print e
+			
+			print "\tWarning",e
 
 		
 	def wrez2xml(self,newdoc,newroot):
@@ -450,8 +565,32 @@ class wrez:
 		return wrez
 
 
-def listz2xml(listz):
+def xml_create(xml_as_str):
+	"""
+		arg:
+			xml_as_str: string representing xml file
+	
+		function:
+			write a xml file from a string
+	"""
+	try:
+		path=str(os.getcwd())+"/backup.xml"
+		fd =open(path,'w')
+		fd.write(xml_as_str)
+		fd.close()
+	except Exception as e:
+		print e
 
+
+def listz2xml(listz):
+	"""
+		arg:
+			listz=list of warez object
+
+		function:
+			create a xml file representing the list of warez objects
+			
+	"""
 	newdoc = minidom.Document()
 	newroot = newdoc.createElement('listz')
 
@@ -470,7 +609,17 @@ def listz2xml(listz):
 
 
 def list_folder(top):
-	
+	"""
+		arg:
+			top = top path directory
+			
+		function:
+			list files in a folder
+			and for each file create a Warez object
+
+		return:
+			list of Warez objects
+	"""
 	listz=[] #wrez object list
 	for root, dirs, files in os.walk(top, topdown=False):
 		for name in files:
@@ -489,33 +638,39 @@ def list_folder(top):
 					new_path= os.path.join(root, filz.reorder())
 					os.rename(path,new_path)
 					filz.hasChanged=True
-					#listz.append(filz) #save only modified name
+					#listz.append(filz) #save into the list only modified name
 					
-				listz.append(filz) #save all files movie extension
+				listz.append(filz) #save all files movie extension into the list
 				
 	return listz
 
 
+
+
+
+
+
+
 def check_redondancy(listz):
-	
+	"""
+		arg:
+			listz=list to check
+		
+		function:
+			check if an element is present more than one time into the list
+	"""
 	for elem in teamz:
 		if teamz.count(elem)>1:
-			print "element",elem,"is present",teamz.count(elem),"times"
+			print "element",elem,"is present",teamz.count(elem),"times"	
 
-
-
-def xml_create(xml_as_str):
-	path=str(os.getcwd())+"/backup.xml"
-	fd =open(path,'w')
-	fd.write(xml_as_str)
-	fd.close()
-	
-	
 
 def test():
+	"""
+		test some filename examples 
+	"""
 	check_redondancy(teamz)
 	check_redondancy(versions)
-	name="The.Dark.Knight.x264.1080p.DTS.DD.5.1.MULTiF.BluRay.GAÏA.mkv"
+	name="The.Dark.Knight.x264.1080p.DTS.DD.5.1.MULTi.BluRay.GAÏA.mkv"
 	wrez("",name)
 	name="XIII.La.Conspiration.Part2.FiNAL.FRENCH.720p.BluRay.x264.JMT.mkv"
 	wrez("",name)
@@ -526,20 +681,21 @@ def test():
 	name="Benjamin.Gates.et.le.trésor.des.Templiers.x264.1080p.DTS.DD5.1.MULTi.BluRay.GAÏA.mkv"
 	wrez("",name)
 
-def recover_old_filename(listz):
-	
-	for wrez in listz:
-		#wrez.printz() debug
-		old_path = os.path.join(wrez.path, wrez.reorder())
-		print "Present \t:",old_path
-		new_path = os.path.join(wrez.path, wrez.init_str)
-		print "replace by\t:",new_path
-		char = raw_input("recover file?\ntype [y/n]\n")
-		if char=='y':
-			print "rename file"
-			os.rename(old_path,new_path)
+
+
+
 
 def extract_list_from_xml(path):
+	"""
+		arg:
+			path = xml file path
+
+		function:
+			extract a list of warez objects from a xml file
+
+		return:
+			list of warez objects
+	"""
 	listz=[]
 	doc = minidom.parse(path)
 	root = doc.documentElement
@@ -549,68 +705,69 @@ def extract_list_from_xml(path):
 			
 			if current.nodeName == 'wrez':
 			
-				attrs = current.attributes
-				
+				attrs = current.attributes				
 				#print attrs.items()[0]
+				
 				hasChanged=attrs.items()[0][1]
+				#print hasChanged
 				
 				for elem in current.getElementsByTagName('path'):
-					#print elem.attributes.items()[0][1]
 					path=elem.attributes.items()[0][1]
+					#print path
 				
 				for elem in current.getElementsByTagName('init_str'):
-					#print elem.attributes.items()[0][1]
 					init_str=elem.attributes.items()[0][1]
+					#print init_str
 
 				for elem in current.getElementsByTagName('hash_sha512'):
-					#print elem.attributes.items()[0][1]
 					hash_sha512=elem.attributes.items()[0][1]
+					#print hash_sha512
 	
 				for elem in current.getElementsByTagName('src_rip'):
-					#print elem.attributes.items()[0][1]
 					src_rip=elem.attributes.items()[0][1]
+					#print src_rip
 
 				for elem in current.getElementsByTagName('quality'):
-					#print elem.attributes.items()[0][1]
 					quality=elem.attributes.items()[0][1]
+					#print quality
 					
 				for elem in current.getElementsByTagName('codec'):
-					#print elem.attributes.items()[0][1]
 					codec=elem.attributes.items()[0][1]
+					#print codec
 	
 				for elem in current.getElementsByTagName('language'):
-					#print elem.attributes.items()[0][1]
 					language=elem.attributes.items()[0][1]
+					#print language
 	
 				for elem in current.getElementsByTagName('audio'):
-					#print elem.attributes.items()[0][1]
 					audio=elem.attributes.items()[0][1]
+					#print audio
 
 				for elem in current.getElementsByTagName('encoder'):
-					#print elem.attributes.items()[0][1]
 					encoder=elem.attributes.items()[0][1]
+					#print encoder
 
 				for elem in current.getElementsByTagName('version'):
-					#print elem.attributes.items()[0][1]
 					version=elem.attributes.items()[0][1]
+					#print version
 			
 				for elem in current.getElementsByTagName('extension'):
-					#print elem.attributes.items()[0][1]
 					extension=elem.attributes.items()[0][1]
+					#print extension
 
 				for elem in current.getElementsByTagName('release_year'):
-					#print elem.attributes.items()[0][1]
 					release_year=elem.attributes.items()[0][1]
+					#print release_year
 			
 				for elem in current.getElementsByTagName('title'):
-					#print elem.attributes.items()[0][1]
 					title=elem.attributes.items()[0][1]
+					#print title
 
-				for elem in current.getElementsByTagName('size'):
-					#print elem.attributes.items()[0][1]
+				for elem in current.getElementsByTagName('size'):					
 					size=elem.attributes.items()[0][1]
+					#print size
 
-
+				dic = {}
 				dic["path"] = path 
 				dic["init_str"] = init_str
 				dic["hash"] = hash_sha512
@@ -628,36 +785,68 @@ def extract_list_from_xml(path):
 				dic["title"] = title
 				dic["size"] = size
 				dic["hasChanged"] = shasChanged
-				warz = warez("","",dic)
+				warz = warez("","",dic) #create warez object
+				
 				listz.append(warz)			
 			
 			#print current.firstChild #same
 			current = current.nextSibling
-
 	return listz
 			
-def save_list_mongo(listz):
-		
-	connection = pymongo.Connection('localhost', 27017)
-	db = connection.database
-	collection = db.warez_collection
-	
+
+def recover_old_filename(listz):
+	"""
+		arg:
+			listz=warez object list
+			
+		function:
+			ask the user if he wants to change the filename by the original value
+	"""
+	for wrez in listz:
+		#wrez.printz() debug
+		old_path = os.path.join(wrez.path, wrez.reorder())
+		print "Present \t:",old_path
+		new_path = os.path.join(wrez.path, wrez.init_str)
+		print "replace by\t:",new_path
+		char = raw_input("recover file?\ntype [y/n]\n")
+		if char=='y':
+			print "rename file"
+			os.rename(old_path,new_path)
 
 
 def recover_from_xml(path):
-	
+	"""
+		restore original filename from a xml file
+	"""
 	listz = extract_list_from_xml(path)
 	recover_old_filename(listz)
+
+
+
+def save_list_mongo(listz):
+	"""
+		save a list into mongo database
+	"""	
+	connection = pymongo.Connection('localhost', 27017)
+	db = connection.database
+	collection = db.warez_collection
+
+
 	
 if __name__ == '__main__':
 	
 	arg_parse = ArgumentParser()
 	arg_parse.add_argument('folder', metavar='folder'  , type=str, help='folder containning movies')
 	arg = arg_parse.parse_args()
-	#test()
-	#listz = list_folder(arg.folder)
-	#listz2xml(listz)
-	#recover_old_filename(listz)
-	extract_list_from_xml(str(os.getcwd())+"/backup.xml")
+
+	
+	#test() #test some example fonction
+
+	
+	listz = list_folder(arg.folder)	#list files in a folder and for each create a warez object
+	listz2xml(listz)	#save list of warez object 
+	#recover_old_filename(listz)	#change the filename by the original value for each warez object in list
+	
+	#listz = extract_list_from_xml( str( os.getcwd() ) + "/backup.xml" )	#recover a list of warez objects from a xml file
 
 	
