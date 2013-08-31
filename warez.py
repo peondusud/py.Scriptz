@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #--*--coding:UTF-8 --*--
-
+#todo thread hash fonction
+#	xml date folder
 import sys
 import os
 import string
@@ -23,9 +24,8 @@ teamz=['iND','iNT','iNTERNAL','ForceBleue','NOWiNHD','FrIeNdS','GAÏA','FHD','RL
 no_upper=['mkv','x264','h264','m2t','ts','iND','wazatt','xXx']
 listz_uploader = ['UpByArG','kn0ppixs','wWw.Mega.Exclue.Com','Extreme.Down.Com']
 
-CSI = "\033["
-color_list =("black","red","green","yellow","blue","magenta","cyan","white","","standard")
-fgcode = CSI+ "3%dm"
+CSI = "\033[31m"
+
 
 
 
@@ -225,10 +225,13 @@ class wrez:
 		"""
 		self.version = ".".join(tuple(self.l_version))		
 		self.audio = ".".join(tuple(self.l_audio))
-				
-		strz=".".join((self.title ,self.release_year , self.version , self.language, self.quality , self.src_rip ,self.audio , self.codec + '-' + self.encoder, self.extension))
-		
-		return strz.replace('..','.') # remove double dot (reason: join dot between 2 empty element)
+		tuplz = (self.release_year , self.version , self.language, self.quality , self.src_rip ,self.audio , self.codec + '-' + self.encoder, self.extension)
+		strz = self.title 
+		for elem in tuplz:
+			if elem != "":
+				strz+="."+elem
+		#strz=".".join((self.title ,self.release_year , self.version , self.language, self.quality , self.src_rip ,self.audio , self.codec + '-' + self.encoder, self.extension))
+		return strz
 			
 	def printz(self):
 		"""
@@ -494,7 +497,7 @@ class wrez:
 			self.hash_sha512 = str(h.hexdigest())
 		except IOError as e:
 			
-			print "\tWarning",e
+			print CSI,"\tWarning",e
 
 		
 	def wrez2xml(self,newdoc,newroot):
@@ -608,11 +611,11 @@ def listz2xml(listz):
 
 
 
-def list_folder(top):
+def list_folder(top,dont_ask=True):
 	"""
 		arg:
 			top = top path directory
-			
+			dont_ask = don't ask the user to rename each file
 		function:
 			list files in a folder
 			and for each file create a Warez object
@@ -630,23 +633,19 @@ def list_folder(top):
 				filz = wrez(root,name)
 				print "Before\t:",name
 				print "After\t:",filz.reorder()
-				char = raw_input("Modify file?\ntype [y/n]\n")
-				
-				
-				if char=='y':
-					print "rename file"
-					new_path= os.path.join(root, filz.reorder())
-					os.rename(path,new_path)
-					filz.hasChanged=True
-					#listz.append(filz) #save into the list only modified name
+				if not dont_ask:
+					char = raw_input("Modify file?\ntype [y/n]\n")
+										
+					if char=='y':
+						print "rename file"
+						new_path= os.path.join(root, filz.reorder())
+						os.rename(path,new_path)
+						filz.hasChanged=True
+						#listz.append(filz) #save into the list only modified name
 					
 				listz.append(filz) #save all files movie extension into the list
 				
 	return listz
-
-
-
-
 
 
 
@@ -822,6 +821,17 @@ def recover_from_xml(path):
 	recover_old_filename(listz)
 
 
+def listz2diclist(listz):
+	"""
+		transform a warez list object to a list of dictionnary
+	"""
+	tmp=[]
+	for elem in listz:
+		dic = elem.warez2dic()
+		tmp.append(dic)
+	return tmp
+
+
 
 def save_list_mongo(listz):
 	"""
@@ -840,11 +850,11 @@ if __name__ == '__main__':
 	arg = arg_parse.parse_args()
 
 	
-	#test() #test some example fonction
+	test() #test some example fonction
 
 	
-	listz = list_folder(arg.folder)	#list files in a folder and for each create a warez object
-	listz2xml(listz)	#save list of warez object 
+	#listz = list_folder(arg.folder)	#list files in a folder and for each create a warez object
+	#listz2xml(listz)	#save list of warez object 
 	#recover_old_filename(listz)	#change the filename by the original value for each warez object in list
 	
 	#listz = extract_list_from_xml( str( os.getcwd() ) + "/backup.xml" )	#recover a list of warez objects from a xml file
