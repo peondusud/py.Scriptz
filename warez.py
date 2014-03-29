@@ -5,6 +5,7 @@
 import sys
 import os
 import string
+import time
 from argparse import ArgumentParser
 from hashlib import  sha512,sha256
 from re import match,compile,search
@@ -598,7 +599,10 @@ def listz2xml(listz):
 	newroot = newdoc.createElement('listz')
 
 	rootattr = newdoc.createAttribute('time')
-	rootattr.nodeValue = '1958'
+	
+	date = str(time.strftime("%H.%M.%S_%d.%m.%y"))
+	rootattr.nodeValue = date
+	#rootattr.nodeValue = '1958'
 	newroot.setAttributeNode(rootattr)
 	
 	for element in listz:
