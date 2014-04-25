@@ -10,7 +10,6 @@ file_type=['mp4','mkv','m2t','m2ts','ts','avi']
 
 def get_parent_folder(file_path):
 	dir = os.path.dirname(file_path)
-	#dir = os.path.abspath(os.path.join(f_path, os.pardir))
 	return os.path.basename(os.path.normpath(dir))
 
 def get_file_extension(file_path):
@@ -29,10 +28,10 @@ def rm_files_into_dir(top):
 	for root, dirs, files in os.walk(top, topdown=False):
 		for name in files:			
 			if not name.endswith( tuple(file_type) + ("srt",) ) :
-				path= os.path.join(root, name)
-				#print "rm_files",path
+				path = os.path.join(root, name)
 				os.chmod(path, stat.S_IWUSR)
 				os.remove(path)
+				print "remove :",path
 
 def has_UpperCase(fileName):
 	"""
@@ -46,7 +45,7 @@ def has_UpperCase(fileName):
 
 def move_file2parent_folder(file_path):
 	new_path = os.path.join( os.path.dirname(os.path.dirname(file_path)), get_fileName(file_path))
-	print"move", new_path
+	print"move to", new_path
 	os.rename(file_path,new_path)
 	
 	
@@ -56,34 +55,33 @@ def rename_filename_by_folder(file_path,move_to_parent_directory=True):
 	else:
 		new_path=os.path.join(os.path.dirname(file_path), get_parent_folder(file_path)) + get_file_extension(file_path)
 	os.rename(file_path,new_path)
-	print "before",file_path
-	print "after",new_path
+	print "move to",new_path
 
 
 def check_bigger_size_file_folder_name(file_path):
 	fileName =  os.path.splitext(get_fileName(file_path))[0] #remove extension
 	folderName = get_parent_folder(file_path)
-	print "fileName",fileName
-	print "folderName",folderName
+	#print "fileName",fileName
+	#print "folderName",folderName
 	if fileName == folderName:
-		print "=dont change filename"
+		#print "=dont change filename"
 		move_file2parent_folder(file_path)
 	elif len(fileName) > len(folderName):
 		if not has_UpperCase(fileName):
-			print "need to change filename by folder name"
+			#print "need to change filename by folder name"
 			rename_filename_by_folder(file_path)
 		else:
-			print "dont change filename"
+			#print "dont change filename"
 			move_file2parent_folder(file_path)
 	elif len(fileName) == len(folderName):
 		if not has_UpperCase(fileName):
-			print "need to change filename by folder name"
+			#print "need to change filename by folder name"
 			rename_filename_by_folder(file_path)
 		else:
-			print "dont change filename"
+			#print "dont change filename"
 			move_file2parent_folder(file_path)
 	else :
-		print "need to change filename by folder name"
+		#print "need to change filename by folder name"
 		rename_filename_by_folder(file_path)
 
 
@@ -104,8 +102,7 @@ def list_folder(top,dont_ask=True):
 					os.chmod(path, stat.S_IWUSR)
 					os.remove(path)
 					continue
-				print "\npath", path, "\nroot", root, "\nname", name
-				
+				#print "\npath", path, "\nroot", root, "\nname", name
 				check_bigger_size_file_folder_name(path)
 
 		for dir in dirs:
