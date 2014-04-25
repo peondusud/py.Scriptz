@@ -89,10 +89,8 @@ def list_folder(top,dont_ask=True):
 	"""
 		arg:
 			top = top path directory
-			dont_ask = don't ask the user to rename each file
 		function:
 			list files in a folder
-			and for each file
 	"""
 	for root, dirs, files in os.walk(top, topdown=False):
 		for name in files:
