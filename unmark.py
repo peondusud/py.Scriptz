@@ -197,7 +197,7 @@ if __name__ == "__main__":
 	parser.add_argument('file', metavar='file'  , type=str, help='PDF file name')
 	#parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
 	parser.add_argument("-v", "--verbose", const = 1, default = 0,type = int, nargs="?", help="increase verbosity: 0 = info, 1 = only warnings, 2 = debug. No number means info. Default is no verbosity.")
-	parser.add_argument("-v", "--nSignature",  type=str, default = SIG , help='PDF file name')
+	parser.add_argument("-m", "--nSignature",  type=str, default = SIG , help='PDF file name')
 	args = parser.parse_args()
 	SIG= args.nSignature
 	
