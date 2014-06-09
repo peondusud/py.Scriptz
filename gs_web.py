@@ -117,8 +117,8 @@ class GKS():
 if __name__ == "__main__":
 	wiki_url = "https://gks.gs/wiki/"
 	wiki_img_folder = "img"
-	user = "xnl"
-	passwd = "ertyuiop"
+	user = "your_username"
+	passwd = "your_pass"
 	g = GKS( user, passwd)
 	g.login()
 	g.get_Cookies()
