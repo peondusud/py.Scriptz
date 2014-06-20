@@ -9,7 +9,7 @@ import shutil
 import stat
 import Tkinter as tk
 
-file_type=['mp4','mkv','m2t','m2ts','ts','avi']
+file_type=['mp4','mkv','m2t','m2ts','ts','avi','MKV','AVI']
 str2remove = ["BY DIGITAL PARADISE", "BY RazerPtigot", "upbyhamoudaxp for wawa mania", "by.ustoman.startimes2.com", "Up By Xlnzz", "AlFleNi-TeaM", "www.planet-series.tv", "ZLVR", "Mrx@prod", "arno122", "[Team-CompleX]","for wawa mania","[tvu.org.ru]"]
 noTix_flag=0
 
@@ -64,8 +64,8 @@ class Gui(tk.Tk):
 		self.lbl_entry_combined_regex.grid(column=1,row=2,sticky='W')
 		
 		self.combined_regex = tk.StringVar()
-		self.combined_regex.set("([01])x(\d\d)")
-		#self.combined_regex.set("[Ss]?([01]?\d?)[eExX]?[pP]?(\d\d)")
+		#self.combined_regex.set("([01])x(\d\d)")
+		self.combined_regex.set("[Ss]?([01]?\d?)[eExX]?[pP]?(\d\d)")
 		self.entry_combined_regex = tk.Entry(self.frame,textvariable=self.combined_regex , width=50)
 		#self.entry_combined_regex.pack( anchor = tk.E)
 		self.entry_combined_regex.grid(column=1,row=2,columnspan=2)
@@ -179,7 +179,6 @@ class Gui(tk.Tk):
 								self.season, self.episode = combined_algo(path ,self.combined_regex.get())
 							elif self.radio_var.get() == "splited":
 								self.season, self.episode = splited_algo(path ,self.season_regex.get(),self.episode_regex.get())
-							#self.season = "%02i" % int("4")
 							self.season = "%02i" % int(self.season)
 							self.episode = "%02i" % int(self.episode)
 							new_filename= self.name_var.get() + ".S" + self.season+ "E" + self.episode + "." + self.info_var.get().replace(" ",".") # need to add teamencoder
@@ -191,15 +190,14 @@ class Gui(tk.Tk):
 							else:
 								if len(self.team_var.get().split(",")) == 1 :
 									new_filename +=  "-" + self.team_var.get()
-							new_filename +=  os.path.splitext(name)[1] # add extension
+							new_filename +=  os.path.splitext(name)[1].lower() # add extension
 							new_filename = new_filename.replace("..",".")
 							new_path = os.path.join(root, new_filename)
 							#print "\nOriginal Filename :", name
 							#print "New Filename :", new_filename
-							print "Original path :", path
+							#print "Original path :", unicode(path)
 							print "New path \t:", new_path 
 							os.rename(path,new_path)
-							# last thing to do is to change filename
 		#sys.exit(0) #to uncomment when no bug
 
 def combined_algo(path,pattern):
@@ -287,14 +285,14 @@ def test_algo(strz):
 
 
 if __name__ == "__main__":
-	strz="Science.X.1x08.27.Decembre.2008.avi"
-	strz="Brain.Games.S01E02.DOC.FRENCH.SDTV.XviD-SiNX"
-	strz="Young.Americans.1x01.Secrets.FR.DVB-Azerty.[tvu.org.ru]"
-	strz="epz-white.collar.201.l.architecte.avi"
-	strz="V.(2009) S01x12 FINAL - Vostfr - arno122 [Team-CompleX] for wawa mania.avi"
+	#strz="Science.X.1x08.27.Decembre.2008.avi"
+	#strz="Brain.Games.S01E02.DOC.FRENCH.SDTV.XviD-SiNX"
+	#strz="Young.Americans.1x01.Secrets.FR.DVB-Azerty.[tvu.org.ru]"
+	#strz="epz-white.collar.201.l.architecte.avi"
+	#strz="V.(2009) S01x12 FINAL - Vostfr - arno122 [Team-CompleX] for wawa mania.avi"
 	#strz="V.2009.S01E04.Mrx@prod.VOSTF..avi"
 	#strz="Mon_Oncle_Charlie_S02_EP08_ZLVR.avi"
-	strz="C:\\StoCk_Series\\Mon oncle Charlie S03\\01.avi"
+	#strz="C:\\StoCk_Series\\Mon oncle Charlie S03\\01.avi"
 	
 	
 	gui = Gui(None)
