@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 #--*--coding:UTF-8 --*--
 
-
 import os
 import sys
 import time
@@ -9,7 +8,6 @@ import string
 import socket
 from fabric.api import *
 from fabric.state import env, output, commands, connections, env_options
-
 
 """
 fabric need  ecdsa pycrypto paramiko
@@ -46,7 +44,6 @@ def exec_remote_cmd(cmd):
 	else:
 		sys.stdout.write('\n* Command failed: '+cmd+'\n')
 		sys.stdout.write(result+"\n")
-
 
 
 def ssh_remote_exec (cmd):
