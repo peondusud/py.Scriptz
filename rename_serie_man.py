@@ -1,5 +1,17 @@
 #!/usr/bin/env python
 #--*--coding:UTF-8 --*--
+
+"""
+TODO:
+create static season input field
+create a button to realod default regex
+add mpg,ogm, filename extension
+check filename multiple source HDTV or DVDRIP or .. tag and apply correct tag
+add a test button that show new filname in a button label (add GUI)
+add fonction to remove some shit
+add filename extension in upper case
+"""
+
 import os
 from re import match,compile,search
 import sys
