@@ -1,10 +1,16 @@
 #!/usr/bin/env python
+"""
+TODO
+exception for windows long path+filename
+check if filename  is already in root/top folder so dont parent folder move
+"""
 import os
 import re
 import sys
 import time
 import shutil
 import stat
+
 file_type=['mp4','mkv','m2t','m2ts','ts','avi']
 noTix_flag=0
 try:
