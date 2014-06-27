@@ -3,6 +3,7 @@
 TODO
 exception for windows long path
 os.sep == '\\' # windows platform
+'\\\\?\\' not in path # UNC path
 if os.sep == '\\' and '\\\\?\\' not in path:
 """
 import os
