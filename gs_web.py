@@ -44,24 +44,38 @@ class Web():
 	def get(self, url, params=None, headers=None):
 		if params is not None:
 			url = url + params
-		response = self.opener.open( url,None,headers)
-		#print response.info()
-		print "Code", response.getcode()
-		print "headers", response.headers
-		print "msg", response.msg
-		print "new url", response.url
-		if response.getcode() == 200 and response.msg == "OK":
-			return response.read()
+		try:
+			reponse = self.opener.open( url,None,headers)
+			#print response.info()
+			#print "Code", response.getcode()
+			#print "headers", response.headers
+			#print "msg", response.msg
+			#print "new url", response.url
+			if reponse.getcode() == 200 and reponse.msg == "OK":
+				return reponse.read()
+			else:
+				print "http code" , reponse.getcode()
+				return None
+
+		except HTTPError as e:
+			print e
 
 	def post(self, url, params=None, headers=None):
-		response = self.opener.open( url,params,headers)
-		#print response.info()
-		print "Code", response.getcode()
-		print "headers", response.headers
-		print "msg", response.msg
-		print "new url", response.url
-		if response.getcode() == 200 and response.msg == "OK":
-			return response.read()
+		try:
+			reponse = self.opener.open( url,params,headers)
+			#print response.info()
+			#print "Code", response.getcode()
+			#print "headers", response.headers
+			#print "msg", response.msg
+			#print "new url", response.url
+			if reponse.getcode() == 200 and reponse.msg == "OK":
+				return reponse.read()
+			else:
+				print "http code" , reponse.getcode()
+				return None
+				
+		except HTTPError as e:
+			print e
 		
 	def get_Cookie(self):
 		return self.cj
@@ -72,6 +86,7 @@ class GKS():
 		self.web = Web()
 		self.usrnm = usr
 		self.passwd = passwd
+		self.login()
 		
 	def login(self):
 		auth_url = "https://gks.gs/login"
@@ -84,12 +99,17 @@ class GKS():
 		return self.web.get( url, params=None, headers=None)
 	
 	def wget(self,url,file_path):
+		print "\twget url", url
+		#print "\twget path", file_path
 		try:
-			fd = open(file_path,"wb")
-			fd.write(self.get_Page(url))
-			fd.close()
+			html = self.get_Page(url)
+			if html is not None:
+				fd = open(file_path,"wb")
+				fd.write(html)
+				fd.close()
 		except IOError as e:
 			print 'file cannot be opened ' + file_path + str(e)
+			
 
 	def get_Cookies(self):
 		cj = self.web.get_Cookie()
@@ -101,13 +121,12 @@ class GKS():
 	def get_Pic(self,url):
 	
 		"https://s.gks.gs/img/img/06-2013/Bien_demarrer_sur_gks.png"
+		
 		path = url.replace("https://s.gks.gs/img/","")
 		#os.path.basename(url)
-		path = path.lstrip('/img/')
 		path = reduce(os.path.join, path.split('/') )
 		#path = os.path.join(os.getcwd(),wiki_img_folder,path)
 		path = os.path.join(wiki_img_folder,path)
-		print path
 		if not os.path.exists(path):
 			folders = os.path.dirname(path)
 			if not os.path.exists(folders):
@@ -117,11 +136,10 @@ class GKS():
 if __name__ == "__main__":
 	wiki_url = "https://gks.gs/wiki/"
 	wiki_img_folder = "img"
-	user = "your_username"
-	passwd = "your_pass"
+	user = "xnl"
+	passwd = "ertyuiop"
 	g = GKS( user, passwd)
-	g.login()
-	g.get_Cookies()
+	#g.get_Cookies()
 	g.get_Pic("https://s.gks.gs/img/img/01-2014/Wiki_GKS_2k14_final2.png")
 	#g.wget("https://s.gks.gs/img/img/01-2014/Wiki_GKS_2k14_final2.png","Wiki_GKS_2k14_final2.png")
 	g.wget(wiki_url,"wiki.html")
