@@ -110,6 +110,7 @@ def clean_watermark(filz, tempFile):
 
 def uncipher_PDF(tempFile, filz):
 	#pdftk chiffré.pdf input_pw mot-de-passe output déchiffré.pdf
+	pass
 
 def uncompress_PDF(filz):
 	logger = logging.getLogger('MyLog')
