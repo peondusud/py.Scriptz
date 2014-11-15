@@ -108,6 +108,9 @@ def clean_watermark(filz, tempFile):
 		logger.error("IO Error")
 		return False
 
+def uncipher_PDF(tempFile, filz):
+	#pdftk chiffré.pdf input_pw mot-de-passe output déchiffré.pdf
+
 def uncompress_PDF(filz):
 	logger = logging.getLogger('MyLog')
 	tempFile = gen_TempfileName(os.path.abspath(filz))
